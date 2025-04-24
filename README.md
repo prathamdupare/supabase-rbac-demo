@@ -74,13 +74,10 @@ USING (
 
 This project shows how to combine Supabase Auth, a custom user table, PostgreSQL RLS, and Next.js to build a secure, role-based access system with admin-only routes.
 
-
+--- 
 --- 
 # NOTES 
 
-Okay, here are notes on Supabase RBAC (Role-Based Access Control) and RLS (Row Level Security), drawing heavily from the concepts explained in the official Supabase documentation.
-
----
 
 ## **Supabase RBAC & RLS Notes**
 
