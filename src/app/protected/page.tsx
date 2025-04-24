@@ -1,11 +1,10 @@
-
 // app/protected/page.tsx
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { useSupabaseSession } from '@/components/supabaseSessionProvider';
-import { supabase } from '@/lib/supabaseClient';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useSupabaseSession } from "@/components/supabaseSessionProvider";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function ProtectedPage() {
   const session = useSupabaseSession();
@@ -15,17 +14,19 @@ export default function ProtectedPage() {
   useEffect(() => {
     if (!session) {
       // not signed in → redirect to /auth
-      router.replace('/auth');
+      router.replace("/auth");
       return;
     }
     // check role in public.users
     supabase
-      .from('users')
-      .select('role')
-      .eq('id', session.user.id)
+      .from("users")
+      .select("role")
+      .eq("id", session.user.id)
       .single()
       .then(({ data, error }) => {
-        if (error || data?.role !== 'admin') setIsAdmin(false);
+        console.log("session.user.id →", session.user.id);
+        console.log("row from users →", data, error);
+        if (error || data?.role !== "admin") setIsAdmin(false);
         else setIsAdmin(true);
       });
   }, [session, router]);
@@ -36,7 +37,10 @@ export default function ProtectedPage() {
   return (
     <div>
       <h1>Protected Admin Page</h1>
-      <p>Only users with <code>role='admin'</code> in <code>public.users</code> see this.</p>
+      <p>
+        Only users with <code>role='admin'</code> in <code>public.users</code>{" "}
+        see this.
+      </p>
     </div>
   );
 }
