@@ -1,4 +1,3 @@
-// app/protected/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -13,11 +12,9 @@ export default function ProtectedPage() {
 
   useEffect(() => {
     if (!session) {
-      // not signed in → redirect to /auth
       router.replace("/auth");
       return;
     }
-    // check role in public.users
     supabase
       .from("users")
       .select("role")
@@ -38,7 +35,7 @@ export default function ProtectedPage() {
     <div>
       <h1>Protected Admin Page</h1>
       <p>
-        Only users with <code>role='admin'</code> in <code>public.users</code>{" "}
+        Only users with <code>role=admin</code> in <code>public.users</code>{" "}
         see this.
       </p>
     </div>
